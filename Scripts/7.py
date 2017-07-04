@@ -8,27 +8,35 @@ from math import sqrt
 listadoPrimos = []
 
 def esPrimo(x:int) -> bool:
-    primo = True
-    sqrtx = sqrt(x)
-    for i in listadoPrimos:
-        if i > sqrtx:
-            break
-        if x%i == 0:
-            primo = False
-            break
-    if primo:
-        listadoPrimos.append(x)
-    return primo
+    if x == 1: return False
+    if x < 4: return True
+    if x % 2 == 0: return False
+    if x < 9: return False
+    if x % 3 == 0: return False
 
+    sqrtx = int(sqrt(x))
+    i = 5
+    while i <= sqrtx:
+        if x % i == 0: return False
+        if x % (i+2) == 0: return False
+        i=i+6
+
+    return True
+
+def generarListadoPrimos(cantidad:int):
+    listadoPrimos.extend([2, 3, 5, 7])
+    candidato = 9
+    while len(listadoPrimos) < cantidad:
+        candidato += 2
+        if esPrimo(candidato):
+            listadoPrimos.append(candidato)
+
+    print("Listado Primos generado")
+            
 def main():
-    contador = 1
-    numero = 1
-    while contador < 10001:
-        numero += 2
-        if esPrimo(numero):
-            contador += 1
+    generarListadoPrimos(10001)
 
-    print(numero)
+    print(listadoPrimos[-1])
 
 
 if __name__ == "__main__":
