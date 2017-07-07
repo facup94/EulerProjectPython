@@ -1,11 +1,6 @@
 #!/usr/bin/python
 import time
 from math import sqrt
-##import sys
-##    if len(sys.argv) > 1:
-##    maxValue = int(sys.argv[1])
-
-listadoPrimos = []
 
 def esPrimo(x:int) -> bool:
     if x == 1: return False
@@ -23,21 +18,19 @@ def esPrimo(x:int) -> bool:
 
     return True
 
-def generarListadoPrimos(cantidad:int):
-    listadoPrimos.extend([2, 3, 5, 7])
-    candidato = 9
-    while len(listadoPrimos) < cantidad:
-        candidato += 2
-        if esPrimo(candidato):
-            listadoPrimos.append(candidato)
+def isCircular(numero):
+    n = str(numero)
+    for i in range(len(n)):
+        if not esPrimo(int(n)): return False
+        n = n[-1] + n[:-1]
+    return True
 
-    print("Listado Primos generado")
-            
 def main():
-    generarListadoPrimos(10001)
-
-    print(listadoPrimos[-1])
-
+    cantidad = 0
+    for i in range(2,1000000):
+        if isCircular(i):
+            cantidad += 1
+    print("cantidad:",cantidad)
 
 if __name__ == "__main__":
     start_time = time.time()

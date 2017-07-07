@@ -1,13 +1,8 @@
 #!/usr/bin/python
 import time
 from math import sqrt
-##import sys
-##    if len(sys.argv) > 1:
-##    maxValue = int(sys.argv[1])
 
-listadoPrimos = []
-
-def esPrimo(x:int) -> bool:
+def isPrime(x:int) -> bool:
     if x == 1: return False
     if x < 4: return True
     if x % 2 == 0: return False
@@ -23,21 +18,24 @@ def esPrimo(x:int) -> bool:
 
     return True
 
-def generarListadoPrimos(cantidad:int):
-    listadoPrimos.extend([2, 3, 5, 7])
-    candidato = 9
-    while len(listadoPrimos) < cantidad:
-        candidato += 2
-        if esPrimo(candidato):
-            listadoPrimos.append(candidato)
+def isTruncatable(num):
+    if not isPrime(num): return False
+    n = str(num)
+    for x in range(1, len(n)):
+        if not isPrime(int(n[x:])): return False
+        if not isPrime(int(n[:x])): return False
+    return True
+    
 
-    print("Listado Primos generado")
-            
 def main():
-    generarListadoPrimos(10001)
-
-    print(listadoPrimos[-1])
-
+    acum = 0
+    i = 11
+    truncatables = []
+    while len(truncatables) < 11:
+        if isTruncatable(i):
+            truncatables.append(i)
+        i += 1
+    print("Suma:",sum(truncatables))
 
 if __name__ == "__main__":
     start_time = time.time()
