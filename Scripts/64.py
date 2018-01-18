@@ -1,36 +1,32 @@
 #!/usr/bin/python
 import time
-import math
+from math import sqrt
 
 def main():
     contador = 0
-    for number in range(2,10001):
-        valores = []
+    for number in range(2, 10001):
+        cantValores = 0
         
-        mi = 0
-        di = 1
-        ai = math.floor(math.sqrt(number))
+        m = 0
+        d = 1
+        a = int(sqrt(number))
+        a0 = int(sqrt(number))
 
-        while True:
+        if a0 == sqrt(number):
+            continue
+
+        while a != 2*a0:
             
-            mi_1 = di*ai - mi
+            m = d*a - m
 
-            di_1 = (number-(mi_1**2))//di
-            if di_1==0:
+            d = (number-(m**2))//d
+            if d == 0:
                 break
-            ai_1 = (math.floor(math.sqrt(number))+mi_1)//di_1
+            a = (a0+m)//d
+            cantValores += 1
 
-            if (mi_1,di_1,ai_1) in valores:
-                break
-
-            valores.append((mi_1,di_1,ai_1))
-            mi = mi_1
-            di = di_1
-            ai = ai_1
-
-        if len(valores)%2!=0:
+        if cantValores % 2 != 0:
             contador += 1
-
     print(contador)
         
 if __name__ == "__main__":

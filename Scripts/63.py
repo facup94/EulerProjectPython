@@ -3,10 +3,14 @@ import time
 
 def main():
     cant = 0
-    for b in range(1, 1001):
-        for a in range(1,10):
-            if len(str(a**b)) == b:
-                cant += 1
+    for a in range(1, 10): #Esto se puede reducir ya que para a>=10 len(a**b)>b
+        b = 1
+        potL = len(str(a**b))
+        while potL == b:
+            cant += 1
+            b += 1
+            potL = len(str(a**b))
+
     print(cant)
         
 if __name__ == "__main__":

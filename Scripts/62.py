@@ -4,7 +4,7 @@ import time
 cubos = []
 cubos_permutaciones = {}
 
-def main():
+def mi_resp_original():
     cubos = [list(str(i**3)) for i in range(10000)]
 
     for i in range(len(cubos)-1):
@@ -29,7 +29,28 @@ def main():
         if len(value) == 4:
             print(key, "-", value)
 
-        
+
+def main():
+    cubes = []
+    i = 1
+
+    while True:
+        cube = sorted(list(str(i**3)))
+
+        cubes.append(cube)
+
+        if cubes.count(cube) == 5:
+            print("permutacion",cube)
+            ind = -1
+            print("valores que producen permutaciones: [", end='')
+            for j in range(5):
+                ind = cubes.index(cube, ind+1)
+                print(ind, end=', ')
+            print("]")
+            print("minimo cubo", cubes.index(cube) ** 3)
+            break
+        i += 1
+
 if __name__ == "__main__":
     start_time = time.time()
     main()
